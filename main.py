@@ -1,12 +1,13 @@
 from task_manager import TaskManager
-
+from ai_service import create_simple_tasks
 def print_menu():
     print("\n---Gestor de Tareas Inteligente---")
     print("1. Añadir Tarea")
-    print("2. Listar Tareas")
-    print("3. Marcar Tarea como Completada")
-    print("4. Eliminar Tarea")
-    print("5. Salir")
+    print("2. Añadir tarea compleja")
+    print("3. Listar Tareas")
+    print("4. Marcar Tarea como Completada")
+    print("5. Eliminar Tarea")
+    print("6. Salir")
 
 def main():
     manager = TaskManager()
@@ -18,6 +19,15 @@ def main():
                 case 1:
                     description = input("Descripción de la tarea: ")
                     manager.add_task(description)
+                case 2:
+                    description = input("Descripción de la tarea compleja: ")
+                    subtasks = create_simple_tasks(description)
+                    for subtask in subtasks:
+                        if not subtask.startswith("Error:"):
+                            manager.add_task(subtask)
+                        else:
+                            print(subtask)
+                            break;
                 case 2:
                     manager.list_tasks()
                 case 3:
